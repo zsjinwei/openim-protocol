@@ -31,7 +31,7 @@ PROTO_NAMES=(
 )
 
 for name in "${PROTO_NAMES[@]}"; do
-  protoc --go_out=plugins=grpc:./${name} --go_opt=module=github.com/openimsdk/protocol/${name} ${name}/${name}.proto
+  protoc --go_out=plugins=grpc:./${name} --go_opt=module=github.com/zsjinwei/openim-protocol/${name} ${name}/${name}.proto
   if [ $? -ne 0 ]; then
       echo "error processing ${name}.proto"
       exit $?
