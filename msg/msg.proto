@@ -375,6 +375,23 @@ message GetStreamMsgResp {
   int64 deadlineTime = 7;
 }
 
+message GroupMessageReadInfo {
+  string  userID = 1;
+  int64 readTime = 2;
+}
+
+message GetGroupMessageHasReadReq {
+  string conversationID = 1;
+  string clientMsgID = 2;
+  int32 type = 3;
+  sdkws.RequestPagination pagination = 4;
+}
+
+message GetGroupMessageHasReadResp {
+  int64 count = 1;
+  repeated GroupMessageReadInfo reads = 2;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -427,4 +444,6 @@ service msg {
 
   rpc AppendStreamMsg(AppendStreamMsgReq) returns (AppendStreamMsgResp);
   rpc GetStreamMsg(GetStreamMsgReq) returns (GetStreamMsgResp);
+
+  rpc GetGroupMessageHasRead(GetGroupMessageHasReadReq) returns (GetGroupMessageHasReadResp);
 }
